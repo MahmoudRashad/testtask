@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailed(String title) {
-
+                        Toast.makeText(MainActivity.this ,title,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

@@ -52,7 +52,9 @@ public class NetworkManger {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Toast.makeText(activity,"onError"+error.getMessage(),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(activity,"onError"+error.getMessage(),Toast.LENGTH_LONG).show();
+                        if (listener!= null)
+                            listener.onFailed(error.getMessage().toString());
                     }
                 });
 
