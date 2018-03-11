@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -52,9 +53,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 NetworkManger networkManger= new NetworkManger(MainActivity.this);
                 networkManger.setCustomObjectListener(new NetworkManger.MyCustomObjectListener() {
-                    @Override
-                    public void onObjectReady(String title) {
 
+
+                    @Override
+                    public void loader(long bytesDownloaded, long totalBytes) {
+                        long per= bytesDownloaded/totalBytes;
+                        per*=100;
+                        if (totalBytes==-1)
+                            ((TextView)findViewById(R.id.loader)).setText("unknown size");
+                        else
+                            ((TextView)findViewById(R.id.loader)).setText("Looding  "+per + " %  .");
                     }
 
                     @Override
@@ -65,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void oncomplate() {
                         addNotification();
+                        ((TextView)findViewById(R.id.loader)).setVisibility(View.GONE);
 
 
                     }
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher_background)
                         .setContentTitle("Download complate ")
+                        .setAutoCancel(true)
                         .setContentText("This is a test notification");
 
         Intent notificationIntent = new Intent(this, installation.class);

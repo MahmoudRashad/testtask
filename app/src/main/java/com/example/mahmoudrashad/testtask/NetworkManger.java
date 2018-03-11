@@ -38,6 +38,8 @@ public class NetworkManger {
                     @Override
                     public void onProgress(long bytesDownloaded, long totalBytes) {
                         // do anything with progress
+                        if (listener!=null)
+                            listener.loader(bytesDownloaded,totalBytes);
 //                        Toast.makeText(activity,"get"+bytesDownloaded +" from "+totalBytes ,Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -63,7 +65,7 @@ public class NetworkManger {
 
     public interface MyCustomObjectListener {
 
-        void onObjectReady(String title);
+        void loader( long bytesDownloaded, long totalBytes);
 
         void onFailed(String title);
         void oncomplate ();
