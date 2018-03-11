@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void loader(long bytesDownloaded, long totalBytes) {
-                        long per= bytesDownloaded/totalBytes;
-                        per*=100;
+                        long per=( bytesDownloaded*100)/totalBytes;
+                        
                         if (totalBytes==-1)
                             ((TextView)findViewById(R.id.loader)).setText("unknown size");
                         else
